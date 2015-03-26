@@ -13,7 +13,7 @@
 #include "tm4c123gh6pm.h"
 
 // ***** 2. Global Declarations Section *****
-
+unsigned long SW1, SW2, current, previous;
 // FUNCTION PROTOTYPES: Each subroutine defined
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
@@ -65,7 +65,7 @@ void SysTick_Init(void){
 }
 unsigned long Led;
 void Delay(void){unsigned long volatile time;
-  time = 160000; // 0.1sec
+  time = 160000/2; // 0.1sec
   while(time){
    time--;
   }
@@ -81,18 +81,28 @@ int main(void){  unsigned long i,last,now;
   i = 0;          // array index
   last = NVIC_ST_CURRENT_R;
   EnableInterrupts();           // enable interrupts for the grader
+	previous = GPIO_PORTF_DATA_R&0x13;
   while(1){
-    Led = GPIO_PORTF_DATA_R;   // read previous
-    Led = Led^0x02;            // toggle red LED
-    GPIO_PORTF_DATA_R = Led;   // output 
-    if(i<50){
+		SW1 = GPIO_PORTF_DATA_R&0x10;
+		SW2 = GPIO_PORTF_DATA_R&0x01;
+		if((SW1 == 0x00) || (SW2 == 0x00)) {
+			Led = GPIO_PORTF_DATA_R;   // read previous
+			Led = Led^0x02;            // toggle red LED
+			GPIO_PORTF_DATA_R = Led;   // output
+			Delay();
+		}
+		else {
+			GPIO_PORTF_DATA_R = 0;
+		}
+		
+		current = GPIO_PORTF_DATA_R&0x13;
+    if((i<50) && (previous != current)){
       now = NVIC_ST_CURRENT_R;
       Time[i] = (last-now)&0x00FFFFFF;  // 24-bit time difference
-      Data[i] = GPIO_PORTF_DATA_R&0x02; // record PF1
+      Data[i] = GPIO_PORTF_DATA_R&0x13; // record PF1
       last = now;
       i++;
     }
-    Delay();
   }
 }
 
