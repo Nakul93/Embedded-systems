@@ -123,9 +123,12 @@ char character;
 // Output: none
 void UART_OutString(unsigned char buffer[]){
 // as part of Lab 11 implement this function
-
+	int i = 0;
+	while(buffer[i]) {
+		UART_OutChar(buffer[i]);
+		i++;
 }
-
+}
 unsigned char String[10];
 //-----------------------UART_ConvertUDec-----------------------
 // Converts a 32-bit number in unsigned decimal format
@@ -138,9 +141,26 @@ unsigned char String[10];
 //  102 to " 102 " 
 // 2210 to "2210 "
 //10000 to "**** "  any value larger than 9999 converted to "**** "
-void UART_ConvertUDec(unsigned long n){
-// as part of Lab 11 implement this function
-  
+void UART_ConvertUDec(unsigned long n)
+{
+	int i; // used in for loops
+	if(n>9999){ // 10000 to "**** "
+	for(i = 0; i < 4; i++)
+	String[i] = '*';
+	}
+	else{ // get digits from least to most significant
+		for(i = 3; i >= 0; i--){
+		if(n > 0 || i == 3) // i != 3 for at least 1 siginificant digit
+			String[i] = n % 10 + 0x30;
+			else // if there are no more significant digits, put spaces
+			String[i] = ' ';
+			n = n / 10;
+		}
+	}
+	// Rest of Sting
+	String[4] = ' ';
+	for(i = 5; i < 10; i++) // clear rest of string
+		String[i] = 0;
 }
 
 //-----------------------UART_OutUDec-----------------------
@@ -166,7 +186,26 @@ void UART_OutUDec(unsigned long n){
 //10000 to "*.*** cm"  any value larger than 9999 converted to "*.*** cm"
 void UART_ConvertDistance(unsigned long n){
 // as part of Lab 11 implement this function
-  
+  // note shifts most significant bit down string at the end
+int i;// used in for loops
+if(n>9999){ // 10000 to "*.*** cm"
+for(i = 1; i < 5; i++)
+String[i] = '*';
+}
+else{ // get digits from least to most significant
+for(i = 4; i > 0; i--){
+String[i] = n % 10 + 0x30;
+n = n / 10;
+}
+}
+// Rest of string
+String[0] = String[1];
+String[1] = '.';
+String[5] = ' ';
+String[6] = 'c';
+String[7] = 'm';
+String[8] = 0;
+String[9] = 0;
 }
 
 //-----------------------UART_OutDistance-----------------------
