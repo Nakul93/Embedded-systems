@@ -9,7 +9,7 @@
 // Runs on LM4F120 or TM4C123
 // Lab2_HelloLaunchPad, Input from PF4, output to PF3,PF2,PF1 (LED)
 // Authors: Daniel Valvano, Jonathan Valvano and Ramesh Yerraballi
-// Date: December 28, 2014
+// Date: January 15, 2016
 
 // LaunchPad built-in hardware
 // SW1 left switch is negative logic PF4 on the Launchpad
@@ -21,7 +21,6 @@
 // 1. Pre-processor Directives Section
 // Constant declarations to access port registers using 
 // symbolic names instead of addresses
-// TExaS.o is the object code for the real-board grader
 #include "TExaS.h"
 #define GPIO_PORTF_DATA_R       (*((volatile unsigned long *)0x400253FC))
 #define GPIO_PORTF_DIR_R        (*((volatile unsigned long *)0x40025400))
@@ -48,15 +47,14 @@ void EnableInterrupts(void);
 // 3. Subroutines Section
 // MAIN: Mandatory for a C Program to be executable
 int main(void){    
-  TExaS_Init(SW_PIN_PF40,LED_PIN_PF321); 
-  // TExaS_Init initializes the real-board grader for lab 2
+	TExaS_Init(SW_PIN_PF40,LED_PIN_PF321); // this initializes the TExaS grader lab 2
   PortF_Init();        // Call initialization of port PF4 PF2    
   EnableInterrupts();  // The grader uses interrupts
   while(1){
-    In = GPIO_PORTF_DATA_R&0x10; // read PF4 into In
+		In = GPIO_PORTF_DATA_R&0x10; // read PF4 into In
     if(In == 0x00){              // zero means SW1 is pressed
       GPIO_PORTF_DATA_R = 0x08;  // LED is green
-    } else{                      // 0x10 means SW1 is not pressed
+		} else{                      // 0x10 means SW1 is not pressed
       GPIO_PORTF_DATA_R = 0x02;  // LED is red
     }
     Delay();                     // wait 0.1 sec
@@ -93,13 +91,13 @@ void PortF_Init(void){ volatile unsigned long delay;
 // white    RGB    0x0E
 // pink     R-B    0x06
 
-// Subroutine to wait about 0.1 sec
+// Subroutine to wait 0.1 sec
 // Inputs: None
 // Outputs: None
-// Notes: the Keil simulation runs a little slower than the real board
+// Notes: ...
 void Delay(void){unsigned long volatile time;
   time = 727240*200/91;  // 0.1sec
   while(time){
-    time--;
+		time--;
   }
 }

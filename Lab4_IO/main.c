@@ -10,7 +10,7 @@
 // Runs on LM4F120 or TM4C123
 // Lab4_IO, Inputs from PF4,PF0, output to PF3,PF2,PF1 (LED)
 // Authors: Daniel Valvano, Jonathan Valvano and Ramesh Yerraballi
-// Date: December 28, 2014
+// Date: January 15, 2016
 
 // LaunchPad built-in hardware
 // SW1 left switch is negative logic PF4 on the Launchpad
@@ -57,15 +57,15 @@ int main(void){
     SW1 = GPIO_PORTF_DATA_R&0x10;     // read PF4 into SW1
     SW2 = GPIO_PORTF_DATA_R&0x01;     // read PF0 into SW2
     if(SW1&&SW2){                     // both pressed
-      GPIO_PORTF_DATA_R = 0x00;       // LED is blue
+      GPIO_PORTF_DATA_R = 0x04;       // LED is blue
     } else{                           
       if(SW1&&(!SW2)){                // just SW1 pressed
-        GPIO_PORTF_DATA_R = 0x08;     // LED is red
+        GPIO_PORTF_DATA_R = 0x02;     // LED is red
       } else{                        
         if((!SW1)&&SW2){              // just SW2 pressed
-          GPIO_PORTF_DATA_R = 0x02;   // LED is green
+          GPIO_PORTF_DATA_R = 0x08;   // LED is green
         }else{                        // neither switch
-          GPIO_PORTF_DATA_R = 0x04;   // LED is off
+          GPIO_PORTF_DATA_R = 0x00;   // LED is off
         }
       }
     }

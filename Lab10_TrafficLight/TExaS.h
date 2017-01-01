@@ -1,15 +1,16 @@
 // TExaS.h
 // Runs on LM4F120/TM4C123
 // Periodic timer Timer5A which will interact with debugger and grade the lab 
+// Periodic timer Timer4A implements analog scope
 // It initializes on reset and runs whenever interrupts are enabled
 // Jonathan Valvano
-// December 28, 2014
+// January 15, 2016
 
 /* This example accompanies the book
-   "Embedded Systems: Introduction to ARM Cortex M Microcontrollers"
-   ISBN: 978-1469998749, Jonathan Valvano, copyright (c) 2014
+   "Embedded Systems: Introduction to ARM Cortex M Microcontrollers",
+   ISBN: 978-1469998749, Jonathan Valvano, copyright (c) 2015
 
- Copyright 2015 by Jonathan W. Valvano, valvano@mail.utexas.edu
+ Copyright 2016 by Jonathan W. Valvano, valvano@mail.utexas.edu
     You may use, edit, run or distribute this file
     as long as the above copyright notice remains
  THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
@@ -34,13 +35,17 @@ enum OutputPorts{
   LED_PIN_PE543210 = 4
 };
 
+enum ScopeModes{
+  ScopeOff = 0,   // no scope needed
+  ScopeOn = 1     // turn on UART0 and stream analog data from PD3 to TExaSdisplay
+};
 // ************TExaS_Init*****************
 // Initialize grader, triggered by timer 5A
 // This needs to be called once 
 // Inputs: iport input(s) connected to this port
 //         oport output(s) connected to this port
-// Outputs: none
-void TExaS_Init(enum InputPorts iport, enum OutputPorts oport);
+//         scope true if oscilloscope to be implemented (uses UART0 and // Outputs: none
+void TExaS_Init(enum InputPorts iport, enum OutputPorts oport, enum ScopeModes scope);
 
 // ************TExaS_Stop*****************
 // Stop the transfer 

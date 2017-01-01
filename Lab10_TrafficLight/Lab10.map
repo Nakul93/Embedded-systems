@@ -8,19 +8,20 @@ Section Cross References
     startup.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup.o(RESET) refers to startup.o(STACK) for StackMem
+    startup.o(RESET) refers to texas.o(i.Timer4A_Handler) for Timer4A_Handler
     startup.o(RESET) refers to texas.o(i.Timer5A_Handler) for Timer5A_Handler
     startup.o(RESET) refers to __main.o(!!!main) for __main
     startup.o(.text) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup.o(.text) refers to startup.o(HEAP) for HeapMem
     startup.o(.text) refers to startup.o(STACK) for StackMem
-    tabletrafficlight.o(i.SysTick_Wait10ms) refers to tabletrafficlight.o(i.SysTick_Wait) for SysTick_Wait
     tabletrafficlight.o(i.main) refers to texas.o(i.TExaS_Init) for TExaS_Init
-    tabletrafficlight.o(i.main) refers to tabletrafficlight.o(i.SysTick_Init) for SysTick_Init
-    tabletrafficlight.o(i.main) refers to tabletrafficlight.o(i.PortBEF_Init) for PortBEF_Init
+    tabletrafficlight.o(i.main) refers to texas.o(i.PLL_Init) for PLL_Init
+    tabletrafficlight.o(i.main) refers to systick.o(i.SysTick_Init) for SysTick_Init
     tabletrafficlight.o(i.main) refers to startup.o(.text) for EnableInterrupts
-    tabletrafficlight.o(i.main) refers to tabletrafficlight.o(i.SysTick_Wait10ms) for SysTick_Wait10ms
+    tabletrafficlight.o(i.main) refers to systick.o(i.SysTick_Wait10ms) for SysTick_Wait10ms
     tabletrafficlight.o(i.main) refers to tabletrafficlight.o(.data) for S
     tabletrafficlight.o(i.main) refers to tabletrafficlight.o(.constdata) for FSM
+    systick.o(i.SysTick_Wait10ms) refers to systick.o(i.SysTick_Wait) for SysTick_Wait
     texas.o(i.Decrypt) refers to texas.o(.bss) for EncriptedMagicCode
     texas.o(i.Decrypt) refers to texas.o(.constdata) for DeScramble
     texas.o(i.Encrypt) refers to texas.o(i.SetCode) for SetCode
@@ -35,9 +36,11 @@ Section Cross References
     texas.o(i.TExaS_Init) refers to texas.o(i.SetCourse) for SetCourse
     texas.o(i.TExaS_Init) refers to texas.o(i.SetCode) for SetCode
     texas.o(i.TExaS_Init) refers to texas.o(i.ADC1_Init) for ADC1_Init
+    texas.o(i.TExaS_Init) refers to texas.o(i.TExaS_Scope) for TExaS_Scope
     texas.o(i.TExaS_Init) refers to texas.o(.constdata) for IntroMsg
     texas.o(i.TExaS_Init) refers to texas.o(.bss) for TExaS
     texas.o(i.TExaS_Init) refers to texas.o(.data) for LastMode
+    texas.o(i.TExaS_Scope) refers to texas.o(i.UART_Init) for UART_Init
     texas.o(i.Timer5A_Handler) refers to texas.o(i.ADC1_In) for ADC1_In
     texas.o(i.Timer5A_Handler) refers to texas.o(i.SetGrade) for SetGrade
     texas.o(i.Timer5A_Handler) refers to texas.o(.data) for TExaS_Period
@@ -162,24 +165,24 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     RESET                                    0x00000000   Section      644  startup.o(RESET)
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry4.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry2.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtentry.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
     ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
@@ -194,22 +197,23 @@ Image Symbol Table
     ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
     ../fplib/fpinit.s                        0x00000000   Number         0  fpinit.o ABSOLUTE
+    SysTick.c                                0x00000000   Number         0  systick.o ABSOLUTE
     TExaS.c                                  0x00000000   Number         0  texas.o ABSOLUTE
     TableTrafficLight.c                      0x00000000   Number         0  tabletrafficlight.o ABSOLUTE
     dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
@@ -269,21 +273,23 @@ Image Symbol Table
     i.ADC1_Init                              0x000003d0   Section        0  texas.o(i.ADC1_Init)
     i.Encrypt                                0x000004a0   Section        0  texas.o(i.Encrypt)
     i.PLL_Init                               0x0000050c   Section        0  texas.o(i.PLL_Init)
-    i.PortBEF_Init                           0x00000588   Section        0  tabletrafficlight.o(i.PortBEF_Init)
-    i.SetCode                                0x000006a0   Section        0  texas.o(i.SetCode)
-    i.SetCourse                              0x000006b8   Section        0  texas.o(i.SetCourse)
-    i.SetGrade                               0x000006d0   Section        0  texas.o(i.SetGrade)
-    i.SysTick_Init                           0x0000079c   Section        0  tabletrafficlight.o(i.SysTick_Init)
-    i.SysTick_Wait                           0x000007aa   Section        0  tabletrafficlight.o(i.SysTick_Wait)
-    i.SysTick_Wait10ms                       0x000007c8   Section        0  tabletrafficlight.o(i.SysTick_Wait10ms)
-    i.TExaS_Init                             0x000007e4   Section        0  texas.o(i.TExaS_Init)
-    i.Timer5A_Handler                        0x00000958   Section        0  texas.o(i.Timer5A_Handler)
-    i.main                                   0x00000f54   Section        0  tabletrafficlight.o(i.main)
-    .constdata                               0x00000ffc   Section      432  tabletrafficlight.o(.constdata)
-    .constdata                               0x000011ac   Section    14264  texas.o(.constdata)
-    .data                                    0x20000000   Section        8  tabletrafficlight.o(.data)
-    .data                                    0x20000008   Section       68  texas.o(.data)
-    RealGrade                                0x20000024   Data           4  texas.o(.data)
+    i.SetCode                                0x00000588   Section        0  texas.o(i.SetCode)
+    i.SetCourse                              0x000005a0   Section        0  texas.o(i.SetCourse)
+    i.SetGrade                               0x000005b8   Section        0  texas.o(i.SetGrade)
+    i.SysTick_Init                           0x00000684   Section        0  systick.o(i.SysTick_Init)
+    i.SysTick_Wait                           0x00000692   Section        0  systick.o(i.SysTick_Wait)
+    i.SysTick_Wait10ms                       0x000006b0   Section        0  systick.o(i.SysTick_Wait10ms)
+    i.TExaS_Init                             0x000006cc   Section        0  texas.o(i.TExaS_Init)
+    i.TExaS_Scope                            0x00000848   Section        0  texas.o(i.TExaS_Scope)
+    i.Timer4A_Handler                        0x000008a8   Section        0  texas.o(i.Timer4A_Handler)
+    i.Timer5A_Handler                        0x000008c8   Section        0  texas.o(i.Timer5A_Handler)
+    i.UART_Init                              0x00000ec4   Section        0  texas.o(i.UART_Init)
+    i.main                                   0x00000f5c   Section        0  tabletrafficlight.o(i.main)
+    .constdata                               0x00001148   Section      396  tabletrafficlight.o(.constdata)
+    .constdata                               0x000012d4   Section    14264  texas.o(.constdata)
+    .data                                    0x20000000   Section       12  tabletrafficlight.o(.data)
+    .data                                    0x2000000c   Section       68  texas.o(.data)
+    RealGrade                                0x20000028   Data           4  texas.o(.data)
     .bss                                     0x20000050   Section      628  texas.o(.bss)
     .bss                                     0x200002c4   Section       96  libspace.o(.bss)
     HEAP                                     0x20000328   Section        0  startup.o(HEAP)
@@ -421,7 +427,6 @@ Image Symbol Table
     Timer2B_Handler                          0x00000283   Thumb Code     0  startup.o(RESET)
     Timer3A_Handler                          0x00000283   Thumb Code     0  startup.o(RESET)
     Timer3B_Handler                          0x00000283   Thumb Code     0  startup.o(RESET)
-    Timer4A_Handler                          0x00000283   Thumb Code     0  startup.o(RESET)
     Timer4B_Handler                          0x00000283   Thumb Code     0  startup.o(RESET)
     Timer5B_Handler                          0x00000283   Thumb Code     0  startup.o(RESET)
     UART0_Handler                            0x00000283   Thumb Code     0  startup.o(RESET)
@@ -516,50 +521,53 @@ Image Symbol Table
     ADC1_Init                                0x000003d1   Thumb Code   168  texas.o(i.ADC1_Init)
     Encrypt                                  0x000004a1   Thumb Code    92  texas.o(i.Encrypt)
     PLL_Init                                 0x0000050d   Thumb Code   118  texas.o(i.PLL_Init)
-    PortBEF_Init                             0x00000589   Thumb Code   218  tabletrafficlight.o(i.PortBEF_Init)
-    SetCode                                  0x000006a1   Thumb Code    20  texas.o(i.SetCode)
-    SetCourse                                0x000006b9   Thumb Code    20  texas.o(i.SetCourse)
-    SetGrade                                 0x000006d1   Thumb Code   196  texas.o(i.SetGrade)
-    SysTick_Init                             0x0000079d   Thumb Code    14  tabletrafficlight.o(i.SysTick_Init)
-    SysTick_Wait                             0x000007ab   Thumb Code    28  tabletrafficlight.o(i.SysTick_Wait)
-    SysTick_Wait10ms                         0x000007c9   Thumb Code    22  tabletrafficlight.o(i.SysTick_Wait10ms)
-    TExaS_Init                               0x000007e5   Thumb Code   248  texas.o(i.TExaS_Init)
-    Timer5A_Handler                          0x00000959   Thumb Code  1510  texas.o(i.Timer5A_Handler)
-    main                                     0x00000f55   Thumb Code   142  tabletrafficlight.o(i.main)
-    FSM                                      0x00000ffc   Data         432  tabletrafficlight.o(.constdata)
-    Port                                     0x000011ac   Data          24  texas.o(.constdata)
-    InputPortMsgA                            0x000011c4   Data          40  texas.o(.constdata)
-    OutputPortMsgA                           0x000011ec   Data          40  texas.o(.constdata)
-    InputPortMsgB                            0x00001214   Data          40  texas.o(.constdata)
-    OutputPortMsgB                           0x0000123c   Data          40  texas.o(.constdata)
-    InputPortMsgE                            0x00001264   Data          40  texas.o(.constdata)
-    OutputPortMsgE                           0x0000128c   Data          40  texas.o(.constdata)
-    BlankMsg                                 0x000012b4   Data          40  texas.o(.constdata)
-    InitializedMsg                           0x000012dc   Data          40  texas.o(.constdata)
-    IntroMsg                                 0x00001304   Data          40  texas.o(.constdata)
-    DoneMsg                                  0x0000132c   Data          40  texas.o(.constdata)
-    TestMsg                                  0x00001354   Data          40  texas.o(.constdata)
-    LabTest                                  0x0000137c   Data       11328  texas.o(.constdata)
-    BgTest                                   0x00003fbc   Data        2400  texas.o(.constdata)
-    Key                                      0x0000491c   Data           8  texas.o(.constdata)
-    Scramble                                 0x00004924   Data          32  texas.o(.constdata)
-    DeScramble                               0x00004944   Data          32  texas.o(.constdata)
-    Region$$Table$$Base                      0x00004964   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00004984   Number         0  anon$$obj.o(Region$$Table)
+    SetCode                                  0x00000589   Thumb Code    20  texas.o(i.SetCode)
+    SetCourse                                0x000005a1   Thumb Code    20  texas.o(i.SetCourse)
+    SetGrade                                 0x000005b9   Thumb Code   196  texas.o(i.SetGrade)
+    SysTick_Init                             0x00000685   Thumb Code    14  systick.o(i.SysTick_Init)
+    SysTick_Wait                             0x00000693   Thumb Code    28  systick.o(i.SysTick_Wait)
+    SysTick_Wait10ms                         0x000006b1   Thumb Code    22  systick.o(i.SysTick_Wait10ms)
+    TExaS_Init                               0x000006cd   Thumb Code   256  texas.o(i.TExaS_Init)
+    TExaS_Scope                              0x00000849   Thumb Code    78  texas.o(i.TExaS_Scope)
+    Timer4A_Handler                          0x000008a9   Thumb Code    20  texas.o(i.Timer4A_Handler)
+    Timer5A_Handler                          0x000008c9   Thumb Code  1510  texas.o(i.Timer5A_Handler)
+    UART_Init                                0x00000ec5   Thumb Code   126  texas.o(i.UART_Init)
+    main                                     0x00000f5d   Thumb Code   408  tabletrafficlight.o(i.main)
+    FSM                                      0x00001148   Data         396  tabletrafficlight.o(.constdata)
+    Port                                     0x000012d4   Data          24  texas.o(.constdata)
+    InputPortMsgA                            0x000012ec   Data          40  texas.o(.constdata)
+    OutputPortMsgA                           0x00001314   Data          40  texas.o(.constdata)
+    InputPortMsgB                            0x0000133c   Data          40  texas.o(.constdata)
+    OutputPortMsgB                           0x00001364   Data          40  texas.o(.constdata)
+    InputPortMsgE                            0x0000138c   Data          40  texas.o(.constdata)
+    OutputPortMsgE                           0x000013b4   Data          40  texas.o(.constdata)
+    BlankMsg                                 0x000013dc   Data          40  texas.o(.constdata)
+    InitializedMsg                           0x00001404   Data          40  texas.o(.constdata)
+    IntroMsg                                 0x0000142c   Data          40  texas.o(.constdata)
+    DoneMsg                                  0x00001454   Data          40  texas.o(.constdata)
+    TestMsg                                  0x0000147c   Data          40  texas.o(.constdata)
+    LabTest                                  0x000014a4   Data       11328  texas.o(.constdata)
+    BgTest                                   0x000040e4   Data        2400  texas.o(.constdata)
+    Key                                      0x00004a44   Data           8  texas.o(.constdata)
+    Scramble                                 0x00004a4c   Data          32  texas.o(.constdata)
+    DeScramble                               0x00004a6c   Data          32  texas.o(.constdata)
+    Region$$Table$$Base                      0x00004a8c   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00004aac   Number         0  anon$$obj.o(Region$$Table)
     S                                        0x20000000   Data           4  tabletrafficlight.o(.data)
     Input                                    0x20000004   Data           4  tabletrafficlight.o(.data)
-    InPort                                   0x20000008   Data           4  texas.o(.data)
-    OutPort                                  0x2000000c   Data           4  texas.o(.data)
-    BgTestStatus                             0x20000010   Data          15  texas.o(.data)
-    TExaS_Period                             0x20000020   Data           4  texas.o(.data)
-    TExaS_Ports                              0x20000028   Data           8  texas.o(.data)
-    TExaS_Meter                              0x20000030   Data           4  texas.o(.data)
-    ADCnum                                   0x20000034   Data           4  texas.o(.data)
-    LastMode                                 0x20000038   Data           4  texas.o(.data)
-    bFlag                                    0x2000003c   Data           4  texas.o(.data)
-    Count                                    0x20000040   Data           4  texas.o(.data)
-    DelayBetweenTests                        0x20000044   Data           4  texas.o(.data)
-    TExaS_Test                               0x20000048   Data           4  texas.o(.data)
+    Led                                      0x20000008   Data           4  tabletrafficlight.o(.data)
+    InPort                                   0x2000000c   Data           4  texas.o(.data)
+    OutPort                                  0x20000010   Data           4  texas.o(.data)
+    BgTestStatus                             0x20000014   Data          15  texas.o(.data)
+    TExaS_Period                             0x20000024   Data           4  texas.o(.data)
+    TExaS_Ports                              0x2000002c   Data           8  texas.o(.data)
+    TExaS_Meter                              0x20000034   Data           4  texas.o(.data)
+    ADCnum                                   0x20000038   Data           4  texas.o(.data)
+    LastMode                                 0x2000003c   Data           4  texas.o(.data)
+    bFlag                                    0x20000040   Data           4  texas.o(.data)
+    Count                                    0x20000044   Data           4  texas.o(.data)
+    DelayBetweenTests                        0x20000048   Data           4  texas.o(.data)
+    TExaS_Test                               0x2000004c   Data           4  texas.o(.data)
     TExaS                                    0x20000050   Data          56  texas.o(.bss)
     TExaS_ADC                                0x20000088   Data         512  texas.o(.bss)
     MagicCode                                0x20000288   Data          10  texas.o(.bss)
@@ -576,102 +584,103 @@ Memory Map of the image
 
   Image Entry point : 0x0000026d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x000049d0, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x00004afc, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Base: 0x00000000, Size: 0x00004984, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Base: 0x00000000, Size: 0x00004aac, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x00000000   0x00000284   Code   RO            3  * RESET               startup.o
-    0x00000284   0x00000008   Code   RO          157  * !!!main             c_w.l(__main.o)
-    0x0000028c   0x00000034   Code   RO          311    !!!scatter          c_w.l(__scatter.o)
-    0x000002c0   0x0000001a   Code   RO          313    !!handler_copy      c_w.l(__scatter_copy.o)
+    0x00000284   0x00000008   Code   RO          178  * !!!main             c_w.l(__main.o)
+    0x0000028c   0x00000034   Code   RO          332    !!!scatter          c_w.l(__scatter.o)
+    0x000002c0   0x0000001a   Code   RO          334    !!handler_copy      c_w.l(__scatter_copy.o)
     0x000002da   0x00000002   PAD
-    0x000002dc   0x0000001c   Code   RO          315    !!handler_zi        c_w.l(__scatter_zi.o)
-    0x000002f8   0x00000002   Code   RO          184    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
-    0x000002fa   0x00000000   Code   RO          191    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          194    .ARM.Collect$$libinit$$00000008  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          196    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          198    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          201    .ARM.Collect$$libinit$$0000000F  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          203    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          205    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          207    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          209    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          211    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          213    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          215    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          217    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          219    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          221    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          225    .ARM.Collect$$libinit$$0000002A  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          227    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          229    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
-    0x000002fa   0x00000000   Code   RO          231    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
-    0x000002fa   0x00000002   Code   RO          232    .ARM.Collect$$libinit$$00000031  c_w.l(libinit2.o)
-    0x000002fc   0x00000002   Code   RO          252    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
-    0x000002fe   0x00000000   Code   RO          266    .ARM.Collect$$libshutdown$$00000003  c_w.l(libshutdown2.o)
-    0x000002fe   0x00000000   Code   RO          269    .ARM.Collect$$libshutdown$$00000006  c_w.l(libshutdown2.o)
-    0x000002fe   0x00000000   Code   RO          272    .ARM.Collect$$libshutdown$$00000009  c_w.l(libshutdown2.o)
-    0x000002fe   0x00000000   Code   RO          274    .ARM.Collect$$libshutdown$$0000000B  c_w.l(libshutdown2.o)
-    0x000002fe   0x00000000   Code   RO          277    .ARM.Collect$$libshutdown$$0000000E  c_w.l(libshutdown2.o)
-    0x000002fe   0x00000002   Code   RO          278    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
-    0x00000300   0x00000000   Code   RO          159    .ARM.Collect$$rtentry$$00000000  c_w.l(rtentry.o)
-    0x00000300   0x00000000   Code   RO          161    .ARM.Collect$$rtentry$$00000002  c_w.l(rtentry2.o)
-    0x00000300   0x00000006   Code   RO          173    .ARM.Collect$$rtentry$$00000004  c_w.l(rtentry4.o)
-    0x00000306   0x00000000   Code   RO          163    .ARM.Collect$$rtentry$$00000009  c_w.l(rtentry2.o)
-    0x00000306   0x00000004   Code   RO          164    .ARM.Collect$$rtentry$$0000000A  c_w.l(rtentry2.o)
-    0x0000030a   0x00000000   Code   RO          166    .ARM.Collect$$rtentry$$0000000C  c_w.l(rtentry2.o)
-    0x0000030a   0x00000008   Code   RO          167    .ARM.Collect$$rtentry$$0000000D  c_w.l(rtentry2.o)
-    0x00000312   0x00000002   Code   RO          188    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
-    0x00000314   0x00000000   Code   RO          234    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
-    0x00000314   0x00000004   Code   RO          235    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
-    0x00000318   0x00000006   Code   RO          236    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x000002dc   0x0000001c   Code   RO          336    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x000002f8   0x00000002   Code   RO          205    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x000002fa   0x00000000   Code   RO          212    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          215    .ARM.Collect$$libinit$$00000008  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          217    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          219    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          222    .ARM.Collect$$libinit$$0000000F  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          224    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          226    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          228    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          230    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          232    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          234    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          236    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          238    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          240    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          242    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          246    .ARM.Collect$$libinit$$0000002A  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          248    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          250    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x000002fa   0x00000000   Code   RO          252    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x000002fa   0x00000002   Code   RO          253    .ARM.Collect$$libinit$$00000031  c_w.l(libinit2.o)
+    0x000002fc   0x00000002   Code   RO          273    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x000002fe   0x00000000   Code   RO          287    .ARM.Collect$$libshutdown$$00000003  c_w.l(libshutdown2.o)
+    0x000002fe   0x00000000   Code   RO          290    .ARM.Collect$$libshutdown$$00000006  c_w.l(libshutdown2.o)
+    0x000002fe   0x00000000   Code   RO          293    .ARM.Collect$$libshutdown$$00000009  c_w.l(libshutdown2.o)
+    0x000002fe   0x00000000   Code   RO          295    .ARM.Collect$$libshutdown$$0000000B  c_w.l(libshutdown2.o)
+    0x000002fe   0x00000000   Code   RO          298    .ARM.Collect$$libshutdown$$0000000E  c_w.l(libshutdown2.o)
+    0x000002fe   0x00000002   Code   RO          299    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x00000300   0x00000000   Code   RO          180    .ARM.Collect$$rtentry$$00000000  c_w.l(rtentry.o)
+    0x00000300   0x00000000   Code   RO          182    .ARM.Collect$$rtentry$$00000002  c_w.l(rtentry2.o)
+    0x00000300   0x00000006   Code   RO          194    .ARM.Collect$$rtentry$$00000004  c_w.l(rtentry4.o)
+    0x00000306   0x00000000   Code   RO          184    .ARM.Collect$$rtentry$$00000009  c_w.l(rtentry2.o)
+    0x00000306   0x00000004   Code   RO          185    .ARM.Collect$$rtentry$$0000000A  c_w.l(rtentry2.o)
+    0x0000030a   0x00000000   Code   RO          187    .ARM.Collect$$rtentry$$0000000C  c_w.l(rtentry2.o)
+    0x0000030a   0x00000008   Code   RO          188    .ARM.Collect$$rtentry$$0000000D  c_w.l(rtentry2.o)
+    0x00000312   0x00000002   Code   RO          209    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x00000314   0x00000000   Code   RO          255    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x00000314   0x00000004   Code   RO          256    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x00000318   0x00000006   Code   RO          257    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
     0x0000031e   0x00000002   PAD
     0x00000320   0x00000030   Code   RO            4    .text               startup.o
-    0x00000350   0x00000006   Code   RO          155    .text               c_w.l(heapauxi.o)
-    0x00000356   0x0000004a   Code   RO          175    .text               c_w.l(sys_stackheap_outer.o)
-    0x000003a0   0x0000000c   Code   RO          177    .text               c_w.l(exit.o)
-    0x000003ac   0x00000008   Code   RO          185    .text               c_w.l(libspace.o)
-    0x000003b4   0x0000000c   Code   RO          244    .text               c_w.l(sys_exit.o)
-    0x000003c0   0x00000002   Code   RO          255    .text               c_w.l(use_no_semi.o)
-    0x000003c2   0x00000000   Code   RO          257    .text               c_w.l(indicate_semi.o)
+    0x00000350   0x00000006   Code   RO          176    .text               c_w.l(heapauxi.o)
+    0x00000356   0x0000004a   Code   RO          196    .text               c_w.l(sys_stackheap_outer.o)
+    0x000003a0   0x0000000c   Code   RO          198    .text               c_w.l(exit.o)
+    0x000003ac   0x00000008   Code   RO          206    .text               c_w.l(libspace.o)
+    0x000003b4   0x0000000c   Code   RO          265    .text               c_w.l(sys_exit.o)
+    0x000003c0   0x00000002   Code   RO          276    .text               c_w.l(use_no_semi.o)
+    0x000003c2   0x00000000   Code   RO          278    .text               c_w.l(indicate_semi.o)
     0x000003c2   0x00000002   PAD
-    0x000003c4   0x0000000c   Code   RO           57    i.ADC1_In           texas.o
-    0x000003d0   0x000000d0   Code   RO           58    i.ADC1_Init         texas.o
-    0x000004a0   0x0000006c   Code   RO           60    i.Encrypt           texas.o
-    0x0000050c   0x0000007c   Code   RO           61    i.PLL_Init          texas.o
-    0x00000588   0x00000118   Code   RO           12    i.PortBEF_Init      tabletrafficlight.o
-    0x000006a0   0x00000018   Code   RO           63    i.SetCode           texas.o
-    0x000006b8   0x00000018   Code   RO           64    i.SetCourse         texas.o
-    0x000006d0   0x000000cc   Code   RO           65    i.SetGrade          texas.o
-    0x0000079c   0x0000000e   Code   RO           13    i.SysTick_Init      tabletrafficlight.o
-    0x000007aa   0x0000001c   Code   RO           14    i.SysTick_Wait      tabletrafficlight.o
-    0x000007c6   0x00000002   PAD
-    0x000007c8   0x0000001c   Code   RO           15    i.SysTick_Wait10ms  tabletrafficlight.o
-    0x000007e4   0x00000174   Code   RO           67    i.TExaS_Init        texas.o
-    0x00000958   0x000005fc   Code   RO           69    i.Timer5A_Handler   texas.o
-    0x00000f54   0x000000a8   Code   RO           16    i.main              tabletrafficlight.o
-    0x00000ffc   0x000001b0   Data   RO           17    .constdata          tabletrafficlight.o
-    0x000011ac   0x000037b8   Data   RO           72    .constdata          texas.o
-    0x00004964   0x00000020   Data   RO          309    Region$$Table       anon$$obj.o
+    0x000003c4   0x0000000c   Code   RO           60    i.ADC1_In           texas.o
+    0x000003d0   0x000000d0   Code   RO           61    i.ADC1_Init         texas.o
+    0x000004a0   0x0000006c   Code   RO           63    i.Encrypt           texas.o
+    0x0000050c   0x0000007c   Code   RO           64    i.PLL_Init          texas.o
+    0x00000588   0x00000018   Code   RO           66    i.SetCode           texas.o
+    0x000005a0   0x00000018   Code   RO           67    i.SetCourse         texas.o
+    0x000005b8   0x000000cc   Code   RO           68    i.SetGrade          texas.o
+    0x00000684   0x0000000e   Code   RO           36    i.SysTick_Init      systick.o
+    0x00000692   0x0000001c   Code   RO           37    i.SysTick_Wait      systick.o
+    0x000006ae   0x00000002   PAD
+    0x000006b0   0x0000001c   Code   RO           38    i.SysTick_Wait10ms  systick.o
+    0x000006cc   0x0000017c   Code   RO           70    i.TExaS_Init        texas.o
+    0x00000848   0x00000060   Code   RO           71    i.TExaS_Scope       texas.o
+    0x000008a8   0x00000020   Code   RO           73    i.Timer4A_Handler   texas.o
+    0x000008c8   0x000005fc   Code   RO           74    i.Timer5A_Handler   texas.o
+    0x00000ec4   0x00000098   Code   RO           75    i.UART_Init         texas.o
+    0x00000f5c   0x000001ec   Code   RO           12    i.main              tabletrafficlight.o
+    0x00001148   0x0000018c   Data   RO           13    .constdata          tabletrafficlight.o
+    0x000012d4   0x000037b8   Data   RO           78    .constdata          texas.o
+    0x00004a8c   0x00000020   Data   RO          330    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Base: 0x20000000, Size: 0x0000004c, Max: 0xffffffff, ABSOLUTE)
-
-    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
-
-    0x20000000   0x00000008   Data   RW           18    .data               tabletrafficlight.o
-    0x20000008   0x00000044   Data   RW           73    .data               texas.o
-
-
-    Execution Region ER_ZI (Base: 0x2000004c, Size: 0x000006dc, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Base: 0x20000000, Size: 0x00000050, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x2000004c   0x00000004   PAD
-    0x20000050   0x00000274   Zero   RW           71    .bss                texas.o
-    0x200002c4   0x00000060   Zero   RW          186    .bss                c_w.l(libspace.o)
+    0x20000000   0x0000000c   Data   RW           14    .data               tabletrafficlight.o
+    0x2000000c   0x00000044   Data   RW           79    .data               texas.o
+
+
+    Execution Region ER_ZI (Base: 0x20000050, Size: 0x000006d8, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x20000050   0x00000274   Zero   RW           77    .bss                texas.o
+    0x200002c4   0x00000060   Zero   RW          207    .bss                c_w.l(libspace.o)
     0x20000324   0x00000004   PAD
     0x20000328   0x00000000   Zero   RW            2    HEAP                startup.o
     0x20000328   0x00000400   Zero   RW            1    STACK               startup.o
@@ -684,14 +693,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       692        632          0          0       1024        908   startup.o
-       518         94        432          8          0       4477   tabletrafficlight.o
-      2608        298      14264         68        628      15370   texas.o
+       692        632          0          0       1024        868   startup.o
+        70          6          0          0          0       1177   systick.o
+       492         84        396         12          0       3661   tabletrafficlight.o
+      2896        354      14264         68        628      19306   texas.o
 
     ----------------------------------------------------------------------
-      3820       1024      14728         76       1656      20755   Object Totals
+      4152       1076      14692         80       1652      25012   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         2          0          0          0          4          0   (incl. Padding)
+         2          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -738,15 +748,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      4092       1040      14728         76       1756      20499   Grand Totals
-      4092       1040      14728         76       1756      20499   ELF Image Totals
-      4092       1040      14728         76          0          0   ROM Totals
+      4424       1092      14692         80       1752      24652   Grand Totals
+      4424       1092      14692         80       1752      24652   ELF Image Totals
+      4424       1092      14692         80          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                18820 (  18.38kB)
+    Total RO  Size (Code + RO Data)                19116 (  18.67kB)
     Total RW  Size (RW Data + ZI Data)              1832 (   1.79kB)
-    Total ROM Size (Code + RO Data + RW Data)      18896 (  18.45kB)
+    Total ROM Size (Code + RO Data + RW Data)      19196 (  18.75kB)
 
 ==============================================================================
 

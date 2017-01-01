@@ -3,7 +3,7 @@
 // Runs on LM4F120/TM4C123
 // In this lab we are learning functional debugging by dumping
 //   recorded I/O data into a buffer
-// February 21, 2014
+// January 15, 2016
 
 // Lab 9
 //      Jon Valvano and Ramesh Yerraballi
@@ -13,7 +13,7 @@
 #include "tm4c123gh6pm.h"
 
 // ***** 2. Global Declarations Section *****
-unsigned long SW1, SW2, current, previous;
+
 // FUNCTION PROTOTYPES: Each subroutine defined
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
@@ -65,7 +65,7 @@ void SysTick_Init(void){
 }
 unsigned long Led;
 void Delay(void){unsigned long volatile time;
-  time = 160000/2; // 0.1sec
+  time = 80000; // 0.1sec
   while(time){
    time--;
   }
@@ -74,38 +74,44 @@ void Delay(void){unsigned long volatile time;
 unsigned long Time[50];
 // you must leave the Data array defined exactly as it is
 unsigned long Data[50];
-int main(void){  unsigned long i,last,now;
-  TExaS_Init(SW_PIN_PF40, LED_PIN_PF1);  // activate grader and set system clock to 16 MHz
-  PortF_Init();   // initialize PF1 to output
-  SysTick_Init(); // initialize SysTick, runs at 16 MHz
-  i = 0;          // array index
+int main(void){  unsigned long i,last,now,SW1,SW2;
+  TExaS_Init(SW_PIN_PF40, LED_PIN_PF1);  
+  PortF_Init();   
+  SysTick_Init(); 
+  i = 0;          
+
+
   last = NVIC_ST_CURRENT_R;
   EnableInterrupts();           // enable interrupts for the grader
-	previous = GPIO_PORTF_DATA_R&0x13;
   while(1){
-		SW1 = GPIO_PORTF_DATA_R&0x10;
-		SW2 = GPIO_PORTF_DATA_R&0x01;
-		if((SW1 == 0x00) || (SW2 == 0x00)) {
-			Led = GPIO_PORTF_DATA_R;   // read previous
-			Led = Led^0x02;            // toggle red LED
-			GPIO_PORTF_DATA_R = Led;   // output
-			Delay();
-		}
-		else {
-			GPIO_PORTF_DATA_R = 0;
-		}
+	
+  	SW1 = GPIO_PORTF_DATA_R&0x01;
+	SW2 = GPIO_PORTF_DATA_R&0x10;
 		
-		current = GPIO_PORTF_DATA_R&0x13;
-    if((i<50) && (previous != current)){
-      now = NVIC_ST_CURRENT_R;
-      Time[i] = (last-now)&0x00FFFFFF;  // 24-bit time difference
-      Data[i] = GPIO_PORTF_DATA_R&0x13; // record PF1
-      last = now;
-      i++;
-    }
+	if(SW1==0x00||SW2==0x00){
+
+		if(i<50){
+       now = NVIC_ST_CURRENT_R;
+              Time[i] = (last-now)&0x00FFFFFF;  // 24-bit time difference
+              last = now;
+              
+			Data[i] = GPIO_PORTF_DATA_R&0x13;
+			i++; 
+			
+		}
+			
+		Led = GPIO_PORTF_DATA_R;   // read previous
+		Led = Led^0x0E;            // toggle red LED
+		GPIO_PORTF_DATA_R = Led;   // output 
+			
+	} if(SW1==0x01 && SW2==0x10){
+	GPIO_PORTF_DATA_R = 0x00;   // read previous
+	}
+
+	
+    Delay();
   }
 }
-
 
 // Color    LED(s) PortF
 // dark     ---    0

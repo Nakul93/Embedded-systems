@@ -3,13 +3,13 @@
 // Periodic timer Timer5A which will interact with debugger and grade the lab 2
 // It initializes on reset and runs whenever interrupts are enabled
 // Daniel Valvano and Jonathan Valvano
-// December 28, 2014
+// January 15, 2016
 
 /* This example accompanies the book
-   "Embedded Systems: Introduction to ARM Cortex M Microcontrollers"
-   ISBN: 978-1469998749, Jonathan Valvano, copyright (c) 2014
+   "Embedded Systems: Introduction to ARM Cortex M Microcontrollers",
+   ISBN: 978-1469998749, Jonathan Valvano, copyright (c) 2015
 
- Copyright 2015 by Jonathan W. Valvano, valvano@mail.utexas.edu
+ Copyright 2016 by Jonathan W. Valvano, valvano@mail.utexas.edu
     You may use, edit, run or distribute this file
     as long as the above copyright notice remains
  THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
@@ -21,7 +21,7 @@
  http://users.ece.utexas.edu/~valvano/
  */
 
-// IMPORTANT: These enumerated types are specific to Lab 6 and should NOT be changed.
+// IMPORTANT: These enumerated types are specific to Lab 2 and should NOT be changed.
 enum InputPorts{
   SW_PIN_PF40 = 5
 };
